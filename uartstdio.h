@@ -44,10 +44,10 @@ extern "C"
 //*****************************************************************************
 #ifdef UART_BUFFERED
 #ifndef UART_RX_BUFFER_SIZE
-#define UART_RX_BUFFER_SIZE     128
+#define UART_RX_BUFFER_SIZE     1024
 #endif
 #ifndef UART_TX_BUFFER_SIZE
-#define UART_TX_BUFFER_SIZE     1024
+#define UART_TX_BUFFER_SIZE     128
 #endif
 #endif
 
@@ -58,7 +58,7 @@ extern "C"
 //*****************************************************************************
 extern void UARTStdioConfig(unsigned long ulPort, unsigned long ulBaud,
                             unsigned long ulSrcClock);
-extern void UARTStdioInit(unsigned long ulPort);
+extern void UARTStdioInit(unsigned long ulPort, unsigned long baudRate);
 extern void UARTStdioInitExpClk(unsigned long ulPort, unsigned long ulBaud);
 extern int UARTgets(char *pcBuf, unsigned long ulLen);
 extern unsigned char UARTgetc(void);

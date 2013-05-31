@@ -36,7 +36,7 @@
 /   3: f_lseek is removed in addition to 2. */
 
 
-#define	_USE_STRFUNC	0	/* 0:Disable or 1-2:Enable */
+#define	_USE_STRFUNC	2	/* 0:Disable or 1-2:Enable */
 /* To enable string functions, set _USE_STRFUNC to 1 or 2. */
 
 
@@ -48,7 +48,7 @@
 /* To enable f_forward function, set _USE_FORWARD to 1 and set _FS_TINY to 1. */
 
 
-#define	_USE_FASTSEEK	0	/* 0:Disable or 1:Enable */
+#define	_USE_FASTSEEK	1	/* 0:Disable or 1:Enable */
 /* To enable fast seek feature, set _USE_FASTSEEK to 1. */
 
 

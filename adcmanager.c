@@ -34,8 +34,8 @@ void adc_init(void)
     // configure the steps of the Sequencer
     ADCSequenceStepConfigure(ADC0_BASE, 0, 0, ADC_CTL_CH4);   //CH4 = PD3  
     ADCSequenceStepConfigure(ADC0_BASE, 0, 1, ADC_CTL_CH5);   //CH5 = PD2    
-    ADCSequenceStepConfigure(ADC0_BASE, 0, 2, ADC_CTL_CH6);   //CH5 = PD1    
-    ADCSequenceStepConfigure(ADC0_BASE, 0, 3, ADC_CTL_CH8 | ADC_CTL_IE | ADC_CTL_END);//CH8 = PE4
+    ADCSequenceStepConfigure(ADC0_BASE, 0, 2, ADC_CTL_CH6);   //CH6 = PD1    
+    ADCSequenceStepConfigure(ADC0_BASE, 0, 3, ADC_CTL_CH8 | ADC_CTL_IE | ADC_CTL_END);//CH8 = PE5
     //ADCSequenceStepConfigure(ADC0_BASE, 0, 1, ADC_CTL_CH11);                    // U_AN1
     //ADCSequenceStepConfigure(ADC0_BASE, 0, 2, ADC_CTL_CH4);                     // U_AN2
     //ADCSequenceStepConfigure(ADC0_BASE, 0, 3, ADC_CTL_CH5);                     // U_AN3
@@ -50,8 +50,15 @@ void adc_init(void)
     ADCIntEnable(ADC0_BASE, 0);
     IntEnable(INT_ADC0);
 
+    /*
+   	for (int i=0; i < 4; i++) {
+        for (int j=0; j < ADC_BUFF_SIZE; j++) {
+            adcBuff[i][j] = 50; //give the buffers a half decent starting value.
+        }
+    }
 
-   	
+    adcBuffCnt = 0;
+    */
 
 }
 
@@ -70,15 +77,33 @@ void ADCIntHandler(void)
     // Get the 4 new values from ADC
     lSampleCount = ADCSequenceDataGet(ADC0_BASE, 0, &(ulADCval[0]));
 
-    if (lutEnabled)
-        lutValue = ulADCval[0];
-    else
-        adcReadings[0] = ulADCval[0];
+    /*
+    for(int i=0; i < 4; i ++) {
 
-    adcReadings[1] = ulADCval[1];
-    adcReadings[2] = ulADCval[2];
-    adcReadings[3] = ulADCval[3];
-    //adcReadings[2] = ulADCval[1];
+        adcBuff[i][adcBuffCnt]  = ulADCval[i];
+    }
+
+    adcBuffCnt++;
+
+    if (adcBuffCnt == ADC_BUFF_SIZE)
+        adcBuffCnt = 0; 
+
+    for (int i=0; i < 4; i++) {
+        adcReadings[i] = 0;
+        for(int j=0; j < ADC_BUFF_SIZE; j++) {
+            adcReadings[i] += adcBuff[i][adcBuffCnt] / ADC_BUFF_SIZE;
+        }
+    }
+    */
+
+    if (lfoEnabled)
+        lutValue = ( (float)ulADCval[3] )/ 13.1f;
+    else
+        adcReadings[0] = ulADCval[3];
+
+    adcReadings[1] = ulADCval[2];
+    adcReadings[2] = ulADCval[0];
+    adcReadings[3] = ulADCval[1];
 
 }
 

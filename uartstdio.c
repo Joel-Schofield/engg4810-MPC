@@ -428,13 +428,13 @@ UARTStdioConfig(unsigned long ulPortNum, unsigned long ulBaud,
 //
 //*****************************************************************************
 void
-UARTStdioInit(unsigned long ulPortNum)
+UARTStdioInit(unsigned long ulPortNum, unsigned long baudRate)
 {
     //
     // Pass this call on to the version of the function allowing the baud rate
     // to be specified.
     //
-    UARTStdioConfig(ulPortNum, 115200, MAP_SysCtlClockGet());
+    UARTStdioConfig(ulPortNum, baudRate, MAP_SysCtlClockGet());
 }
 
 //*****************************************************************************
@@ -515,7 +515,7 @@ UARTwrite(const char *pcBuf, unsigned long ulLen)
         // If the character to the UART is \n, then add a \r before it so that
         // \n is translated to \n\r in the output.
         //
-        if(pcBuf[uIdx] == '\n')
+        if(pcBuf[uIdx] == '\n' && 0)
         {
             if(!TX_BUFFER_FULL)
             {

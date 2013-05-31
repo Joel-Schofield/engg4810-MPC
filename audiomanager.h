@@ -11,5 +11,4 @@ int getEffect(int fxSlot);
 int stepAudioProcess();
 int biquadGen(int type, float Fc, float Q, float Fs, float32_t* pCoeffs);
 
-
 #endif

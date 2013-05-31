@@ -59,7 +59,7 @@ CORECM4=${STELLARISWARE_PATH}/CMSIS-3.20/CMSIS/Include
 # Option arguments for C compiler.
 CFLAGS=-mthumb ${CPU} ${FPU} -O0 -ffunction-sections -fdata-sections -MD -std=c99 -Wall -pedantic -c -g
 # Library stuff passed as flags!
-CFLAGS+= -I ${STELLARISWARE_PATH} -I ${CORECM4} -I ${ARMCM4}  -DPART_$(PART) -c -DTARGET_IS_BLIZZARD_RA1
+CFLAGS+= -I ${STELLARISWARE_PATH} -I ${CORECM4} -I ${ARMCM4} -DPART_$(PART) -c -DTARGET_IS_BLIZZARD_RA1
 
 # Flags for LD
 LFLAGS  = --gc-sections

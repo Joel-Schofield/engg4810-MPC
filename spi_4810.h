@@ -20,6 +20,8 @@ extern "C"
 #define SSI_DAC_TX GPIO_PIN_7 //port B
 #define SSI_DAC_CS GPIO_PIN_5 //port B
 
+	
+
 void initDACSSI();
 void SPIWriteDAC(unsigned short cmd, unsigned short data);
 
